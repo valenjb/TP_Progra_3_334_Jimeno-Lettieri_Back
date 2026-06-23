@@ -43,4 +43,10 @@ async function getAll({ category, page = 1, limit = 8, onlyActive = true } = {})
     };
 }
 
-export default { getAll };
+async function getById(id) {
+    const sql = "SELECT * FROM productos WHERE id = ?";
+    const [rows] = await connection.query(sql, [id]);
+    return rows[0];
+}
+
+export default { getAll, getById };

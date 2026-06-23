@@ -25,6 +25,28 @@ async function getProductos(req, res) {
     }
 }
 
+async function getProductoById(req, res) {
+    try {
+        const producto = await productosModel.getById(req.id);
+
+        if (!producto) {
+            return res.status(404).json({
+                error: `No se encontro producto con id ${req.id}`
+            });
+        }
+
+        res.status(200).json({ payload: producto });
+
+    } catch (error) {
+        console.log("Error obteniendo producto con id: ", error.message);
+        res.status(500).json({
+            error: "Error interno al obtener un producto con id"
+        });
+    }
+}
+
+
 export default {
-    getProductos
+    getProductos,
+    getProductoById
 };
