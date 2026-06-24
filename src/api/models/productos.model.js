@@ -1,5 +1,6 @@
 import connection from "../database/db.js";
 
+// Trae productos con filtros opcionales por categoria/subcategoria y paginacion
 async function getAll({ category, page = 1, limit = 8, onlyActive = true } = {}) {
     const condiciones = [];
     const params = [];
@@ -12,7 +13,6 @@ async function getAll({ category, page = 1, limit = 8, onlyActive = true } = {})
         condiciones.push("category = ?");
         params.push(category);
     }
-
 
     const where = condiciones.length > 0 ? `WHERE ${condiciones.join(" AND ")}` : "";
 
@@ -49,4 +49,48 @@ async function getById(id) {
     return rows[0];
 }
 
-export default { getAll, getById };
+async function create(data) {
+    const { name, description, image, category, price } = data;
+
+    const sql = `
+        INSERT INTO productos (name, description, image, category, price, active)
+        VALUES (?, ?, ?, ?, ?, 1)
+    `;
+
+    const [result] = await connection.query(sql, [
+        name,
+        description || null,
+        image,
+        category,
+        price
+    ]);
+
+    return result.insertId;
+}
+
+async function update(id, data) {
+    const { name, description, image, category, price } = data;
+
+    const sql = `
+        UPDATE productos
+        SET name = ?, description = ?, image = ?, category = ?, price = ?
+        WHERE id = ?
+    `;
+
+    await connection.query(sql, [
+        name,
+        description || null,
+        image,
+        category,
+        price,
+        id
+    ]);
+}
+
+// Baja logica / reactivacion (no borramos filas, solo cambiamos el flag active)
+async function setActive(id, active) {
+    const sql = "UPDATE productos SET active = ? WHERE id = ?";
+    await connection.query(sql, [active ? 1 : 0, id]);
+}
+
+export default { getAll, getById, create, update, setActive };
