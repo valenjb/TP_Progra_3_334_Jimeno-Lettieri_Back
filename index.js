@@ -23,7 +23,7 @@ app.use(express.json());
 
 // Endpoints
 app.get("/", (req, res) => {
-    res.send("API de ByteStop funcionando correctamente");
+    res.send("API de LVTech funcionando correctamente");
 });
 
 // Todas las rutas de la API quedan agrupadas bajo /api

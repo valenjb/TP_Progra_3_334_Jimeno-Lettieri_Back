@@ -2,7 +2,7 @@ const CATEGORIAS_VALIDAS = ["hardware", "software"];
 
 // valida los datos del producto antes de llegar al controller
 const validateProducto = (req, res, next) => {
-    const { name, image, category, subcategory, price } = req.body;
+    const { name, image, category, price } = req.body;
     const errores = [];
 
     if (!name || typeof name !== "string" || name.trim().length === 0) {
