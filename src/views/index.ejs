@@ -1,0 +1,21 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
+
+<main class="productos">
+    <h2><%= about %></h2>
+    <div id="contenedor-productos" class="grilla-productos">
+        <% productos.forEach(producto => { %>
+            <article class="card-producto">
+                <img src="<%= producto.image %>" alt="<%= producto.name %>">
+                <span class="etiqueta-subcategoria"><%= producto.category %></span>
+                <h3><%= producto.name %></h3>
+                <p class="descripcion"><%= producto.description || "" %></p>
+                <p class="precio mono">$<%= Number(producto.price).toLocaleString("es-AR") %></p>
+                <p style="font-size: 12px; color: var(--texto-tenue);">ID: <%= producto.id %></p>
+                <%- producto.active ? '<span style="color: green;">● Activo</span>' : '<span style="color: red;">● Inactivo</span>' %>
+            </article>
+        <% }) %>
+    </div>
+</main>
+
+<%- include("partials/footer.ejs") %>

@@ -47,6 +47,23 @@ CREATE TABLE IF NOT EXISTS venta_productos (
 );
 
 -- ---------------------------------------------------------
+-- Tabla usuarios
+-- password se guardara encriptado con bcrypt (por ahora texto plano)
+-- es_admin: distingue administradores de usuarios comunes
+-- ---------------------------------------------------------
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    es_admin TINYINT(1) NOT NULL DEFAULT 0
+);
+
+-- Usuario admin de prueba (password sin encriptar, se cambia cuando implementemos bcrypt)
+INSERT INTO usuarios (nombre, email, password, es_admin) VALUES
+('Admin', 'admin@lvtech.com', '1234', 1);
+
+-- ---------------------------------------------------------
 -- Datos de ejemplo: 7 productos de hardware (perifericos) y
 -- 7 de software (licencias). Dos quedan inactivos a proposito
 -- para poder probar despues el alta/baja desde el panel admin.

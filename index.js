@@ -1,33 +1,46 @@
-
 import express from "express";
 import cors from "cors";
+import session from "express-session";
 import environments from "./src/api/config/environments.js";
 import apiRoutes from "./src/api/routes/index.routes.js";
-
+import authRoutes from "./src/api/routes/auth.routes.js";
+import viewRoutes from "./src/api/routes/view.routes.js";
+import { join, __dirname } from "./src/api/utils/index.js";
 
 const app = express();
-const PORT = environments.port;
+const { port, session_key } = environments;
+const PORT = port;
 
+// ---------- Configuracion de vistas EJS ----------
+app.set("view engine", "ejs");
+app.set("views", join(__dirname, "src/views"));
 
-// Middlewares
-app.use(cors()); 
+// ---------- Middlewares ----------
+app.use(cors());
 
-// Logger por consola de cada solicitud
 app.use((req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
     next();
 });
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(join(__dirname, "src/public")));
 
+app.use(session({
+    secret: session_key,
+    resave: false,
+    saveUninitialized: true
+}));
 
-// Endpoints
+// ---------- Rutas ----------
 app.get("/", (req, res) => {
     res.send("API de LVTech funcionando correctamente");
 });
 
-// Todas las rutas de la API quedan agrupadas bajo /api
 app.use("/api", apiRoutes);
+app.use("/dashboard", viewRoutes);
+app.use("/login", authRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
