@@ -2,9 +2,7 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import environments from "./src/api/config/environments.js";
-import apiRoutes from "./src/api/routes/index.routes.js";
-import authRoutes from "./src/api/routes/auth.routes.js";
-import viewRoutes from "./src/api/routes/view.routes.js";
+import { productosRoutes, ventasRoutes, authRoutes, viewRoutes } from "./src/api/routes/index.routes.js";
 import { join, __dirname } from "./src/api/utils/index.js";
 
 const app = express();
@@ -38,9 +36,14 @@ app.get("/", (req, res) => {
     res.send("API de LVTech funcionando correctamente");
 });
 
-app.use("/api", apiRoutes);
+// app.use("/api", apiRoutes);
+// app.use("/dashboard", viewRoutes);
+// app.use("/login", authRoutes);
+
+app.use("/api/productos", productosRoutes);
+app.use("/api/ventas", ventasRoutes);
 app.use("/dashboard", viewRoutes);
-app.use("/login", authRoutes);
+app.use("/login", authRoutes);    
 
 app.listen(PORT, () => {
     console.log(`Servidor backend corriendo en http://localhost:${PORT}`);

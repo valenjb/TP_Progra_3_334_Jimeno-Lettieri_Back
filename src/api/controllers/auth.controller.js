@@ -4,6 +4,8 @@
 
 import connection from "../database/db.js";
 
+import bcrypt from "bcrypt";
+
 // Vista Login
 export const loginView = (req, res) => {
     res.render("login", {
@@ -25,8 +27,12 @@ export const getAdminUser = async (req, res) => {
             });
         }
 
-        const sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
-        const [rows] = await connection.query(sql, [email, password]);
+        // SIN BCRYPT
+        // const sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+        // const [rows] = await connection.query(sql, [email, password]);
+
+        const sql = "SELECT * FROM usuarios WHERE email = ?";
+        const [rows] = await connection.query(sql, [email]);
 
         if (rows.length === 0) {
             return res.render("login", {
@@ -38,14 +44,30 @@ export const getAdminUser = async (req, res) => {
 
         const user = rows[0];
 
-        req.session.user = {
-            id: user.id,
-            nombre: user.nombre,
-            email: user.email
-        };
+        console.table(user);
+        console.table(password);
 
-        res.redirect("/dashboard/index");
+        const match = await bcrypt.compare(password, user.password);
+        console.log(match);
+        // Hasheamos la clave en "https://bcrypt-generator.com/"
 
+        if (match) {
+            req.session.user = {
+                id: user.id,
+                nombre: user.nombre,
+                email: user.email
+            };
+
+            return res.redirect("/dashboard/index");
+
+        } else {
+            return res.render("login", {
+                title: "Login · LVTech Admin",
+                about: "Ingresá tu email y contraseña",
+                error: "Credenciales incorrectas"
+            });
+
+        }
     } catch (error) {
         console.log(error);
     }

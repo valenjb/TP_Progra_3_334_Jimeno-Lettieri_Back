@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 -- Usuario admin de prueba (password sin encriptar, se cambia cuando implementemos bcrypt)
 INSERT INTO usuarios (nombre, email, password, es_admin) VALUES
-('Admin', 'admin@lvtech.com', '1234', 1);
+('Admin', 'admin@lvtech.com', '$2a$10$vmfkTWmYO5xpTJ5IOmUv.uFG2rArrWsI/pavWJBV/nFd.utIrQk2G', 1);
 
 -- ---------------------------------------------------------
 -- Datos de ejemplo: 7 productos de hardware (perifericos) y
