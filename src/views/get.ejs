@@ -4,9 +4,13 @@
 <main class="productos">
     <h2><%= about %></h2>
 
-    <form id="getProduct-form">
+    <form id="getProduct-form" class="form-admin">
         <label for="idProd">Id del producto</label>
-        <input type="number" name="idProd" id="idProd" required min="1">
+        <div class="input-number-control">
+            <button type="button" class="btn-menos">−</button>
+            <input type="number" name="idProd" id="idProd" required min="1" value="1">
+            <button type="button" class="btn-mas">+</button>
+        </div>
         <button type="submit" class="boton-primario">Consultar producto</button>
     </form>
 

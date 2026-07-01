@@ -22,16 +22,21 @@ header {
     width: auto;
 }
 
-/* Para el cambio de logo dependiendo del tema */
+/* Por defecto ocultamos el logo oscuro */
 .logo-oscuro {
     display: none;
 }
 
-body[data-tema="oscuro"] .logo-claro {
+/* Para el cambio de logo dependiendo del tema */
+html[data-tema="claro"] .logo-oscuro {
     display: none;
 }
 
-body[data-tema="oscuro"] .logo-oscuro {
+html[data-tema="oscuro"] .logo-claro {
+    display: none;
+}
+
+html[data-tema="oscuro"] .logo-oscuro {
     display: block;
 }
 /* fin cambio de logo dependiendo del tema */
@@ -144,14 +149,4 @@ header::after {
 
 @media (prefers-reduced-motion: reduce) {
     header::after { animation: none; }
-}
-
-/* ---------- boton cambio de tema ---------- */
-.boton-tema {
-    background: var(--bg);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    width: 35px;
-    height: 30px;
-    font-size: 15px;
 }

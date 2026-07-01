@@ -3,6 +3,16 @@ const contenedorForm = document.getElementById("contenedor-form");
 const getProductForm = document.getElementById("getProduct-form");
 const urlBase = "http://localhost:3000/api/productos";
 
+document.querySelector(".btn-menos")?.addEventListener("click", () => {
+    const input = document.getElementById("idProd");
+    if (Number(input.value) > 1) input.value = Number(input.value) - 1;
+});
+
+document.querySelector(".btn-mas")?.addEventListener("click", () => {
+    const input = document.getElementById("idProd");
+    input.value = Number(input.value) + 1;
+});
+
 getProductForm.addEventListener("submit", async event => {
     event.preventDefault();
 
