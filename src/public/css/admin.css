@@ -25,6 +25,13 @@
     margin-top: 6px;
 }
 
+.toggle-tema-flotante {
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    z-index: 999;
+}
+
 .lista-producto {
     display: flex;
     align-items: center;
