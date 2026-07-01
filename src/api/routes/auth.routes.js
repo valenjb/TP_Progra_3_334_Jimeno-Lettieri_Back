@@ -3,7 +3,7 @@
 ============================*/
 
 import { Router } from "express";
-import { loginView, getAdminUser } from "../controllers/auth.controller.js";
+import { loginView, getAdminUser, destroySession } from "../controllers/auth.controller.js";
 
 const router = Router();
 
@@ -12,5 +12,9 @@ router.get("/", loginView);
 
 // POST login
 router.post("/", getAdminUser);
+
+// POST logout
+router.post("/destroy", destroySession);
+
 
 export default router;

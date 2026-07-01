@@ -50,3 +50,22 @@ export const getAdminUser = async (req, res) => {
         console.log(error);
     }
 };
+
+// POST logout
+export const destroySession = (req, res) => {
+    req.session.destroy((err) => {
+
+        // Si hubiera algun error, mandamos un aviso por consola y por un alert y retornamos un error 500
+        if (err) {
+            console.error("Error al destruir la sesion: ", err);
+            alert("Error al destruir la sesion: ", err);
+
+            return res.status(500).json({
+                message: "Error al cerrar sesion"
+            })
+        }
+
+        // Si no existiera ningun error, redirigimos a la pagina de login
+        res.redirect("/login");
+    })
+}
