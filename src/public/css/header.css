@@ -39,6 +39,15 @@ html[data-tema="oscuro"] .logo-claro {
 html[data-tema="oscuro"] .logo-oscuro {
     display: block;
 }
+
+html[data-tema="claro"] .toggle-thumb {
+    transform: translateX(32px);
+}
+
+html[data-tema="claro"] .toggle-track {
+    background: #f0a500;
+}
+
 /* fin cambio de logo dependiendo del tema */
 
 .nombre-app {
