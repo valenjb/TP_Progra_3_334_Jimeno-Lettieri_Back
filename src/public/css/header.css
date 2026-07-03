@@ -138,6 +138,22 @@ html[data-tema="claro"] .toggle-track {
     padding: 0 5px;
 }
 
+/* ---------- Boton logout ---------- */
+.btn-logout-img {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex; 
+    align-items: center;  
+}
+
+.links-header {
+    display: block;
+    height: 2rem;
+    margin-top: 0.5rem;
+}
+
 /* ---------- Efecto de brillo ---------- */
 header::after {
     content: "";

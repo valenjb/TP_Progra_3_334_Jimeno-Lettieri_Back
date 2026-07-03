@@ -268,3 +268,19 @@ main.ticket {
     color: var(--texto-tenue);
     font-size: 13px;
 }
+
+/* ---------- Boton autocompletar ---------- */
+.btn-autocomp {
+    background: none;
+    border: none;
+    padding: 0;
+    
+    display: flex; 
+    justify-content: center; 
+    margin: 1.5rem auto 0 auto; 
+}
+
+.links-login {
+    display: block;
+    height: 2rem;
+}

@@ -13,6 +13,12 @@
             <input type="password" name="password" id="passwordUser" required>
 
             <button type="submit" class="boton-primario">Ingresar</button>
+
+            <div class="contenedor-autocomp">
+                <button type="button" id="btnAutofill" class="btn-autocomp">
+                    <img src="/assets/img/varios/autocompletar.png" alt="autocompletar" class="links-login">
+                </button>
+            </div>  
         </form>
 
         <% if (typeof error !== "undefined") { %>
@@ -20,5 +26,19 @@
         <% } %>
     </section>
 </main>
+
+<script>
+    const btnAutofill = document.getElementById('btnAutofill');
+    if (btnAutofill) {
+        btnAutofill.addEventListener('click', () => {
+            const emailInput = document.getElementById('emailUser');
+            const passwordInput = document.getElementById('passwordUser');
+
+            emailInput.value = 'admin@lvtech.com';
+            passwordInput.value = '1234';
+            
+        });
+    }
+</script>
 
 <%- include("partials/footer.ejs") %>
